@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Meny – Fryd Manglerud Gastropub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0D0B08; --ink2:#181510; --ink3:#232018; --ink4:#2A2520;
+  --cream:#F7F2EA; --white:#FDFAF5;
+  --gold:#C9893C; --gold2:#E8A85A; --gold3:#A86D28;
+  --gold-dim:rgba(201,137,60,.1); --gold-border:rgba(201,137,60,.2);
+  --muted:#8A8070; --muted2:#5C5548;
+  --display:'Cormorant Garamond',Georgia,serif;
+  --body:'Outfit',sans-serif;
+  --ease:cubic-bezier(.25,.46,.45,.94);
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--ink);color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;object-fit:cover}
+a{text-decoration:none;color:inherit}
+
+/* NOISE */
+body::before{content:'';position:fixed;inset:0;z-index:999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:.025;mix-blend-mode:overlay}
+
+/* ─── TOP NAV ─── */
+#topnav{
+  position:fixed;top:0;left:0;right:0;z-index:900;height:68px;
+  display:flex;align-items:center;justify-content:space-between;padding:0 4vw;
+  background:rgba(13,11,8,.92);backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--gold-border);
+}
+.nav-logo{font-family:var(--display);font-size:1.4rem;font-weight:700;color:var(--gold)}
+.nav-logo em{color:var(--cream);font-style:italic;font-weight:400}
+.nav-right{display:flex;align-items:center;gap:1.5rem}
+.nav-back{display:inline-flex;align-items:center;gap:.5rem;font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);transition:color .2s}
+.nav-back svg{width:15px;height:15px;transition:transform .2s}
+.nav-back:hover{color:var(--gold)}
+.nav-back:hover svg{transform:translateX(-3px)}
+.nav-book{background:var(--gold);color:var(--ink);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.55rem 1.2rem;border-radius:2px;transition:background .2s}
+.nav-book:hover{background:var(--gold2);color:var(--ink)}
+
+/* ─── HERO ─── */
+.menu-hero{
+  position:relative;height:52vh;min-height:380px;
+  display:flex;align-items:flex-end;
+  padding:0 4vw 4rem;overflow:hidden;
+  margin-top:68px;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600&q=85') center 40%/cover no-repeat;
+  filter:brightness(.38) saturate(.75);
+  transform:scale(1.04);animation:hzoom 8s var(--ease) forwards;
+}
+@keyframes hzoom{to{transform:scale(1)}}
+.hero-content{position:relative;max-width:680px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;opacity:0;animation:fup .8s .2s var(--ease) forwards}
+.hero-eyebrow span{width:22px;height:1px;background:var(--gold);display:block}
+.menu-hero h1{font-family:var(--display);font-size:clamp(2.4rem,5.5vw,4.2rem);font-weight:700;line-height:1.05;color:var(--white);opacity:0;animation:fup .8s .4s var(--ease) forwards}
+.menu-hero h1 i{font-style:italic;color:var(--gold);font-weight:400}
+.hero-sub{font-size:.95rem;color:rgba(247,242,234,.55);margin-top:.9rem;font-weight:300;opacity:0;animation:fup .8s .6s var(--ease) forwards}
+@keyframes fup{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* ─── STICKY CATEGORY NAV ─── */
+#catnav{
+  position:sticky;top:68px;z-index:800;
+  background:rgba(24,21,16,.96);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--gold-border);
+  overflow-x:auto;scrollbar-width:none;
+}
+#catnav::-webkit-scrollbar{display:none}
+.catnav-inner{
+  display:flex;gap:0;padding:0 4vw;
+  min-width:max-content;
+}
+.catnav-btn{
+  background:none;border:none;border-bottom:2px solid transparent;
+  font-family:var(--body);font-size:.75rem;font-weight:500;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  padding:.9rem 1.1rem;margin-bottom:-1px;
+  cursor:pointer;white-space:nowrap;
+  transition:color .2s,border-color .2s;
+}
+.catnav-btn:hover{color:var(--cream)}
+.catnav-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+
+/* ─── MAIN LAYOUT ─── */
+.menu-body{display:flex;gap:0;max-width:1400px;margin:0 auto}
+
+/* ─── SIDEBAR (desktop) ─── */
+.sidebar{
+  width:240px;flex-shrink:0;
+  position:sticky;top:calc(68px + 42px);
+  height:calc(100vh - 68px - 42px);
+  overflow-y:auto;scrollbar-width:none;
+  padding:2.5rem 0 2.5rem 4vw;
+  border-right:1px solid var(--gold-border);
+  display:flex;flex-direction:column;gap:.2rem;
+}
+.sidebar::-webkit-scrollbar{display:none}
+.sidebar-section{margin-bottom:1.5rem}
+.sidebar-heading{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted2);padding:.4rem .75rem;margin-bottom:.25rem}
+.sidebar-link{
+  display:flex;align-items:center;gap:.65rem;
+  font-size:.82rem;font-weight:400;color:var(--muted);
+  padding:.5rem .75rem;border-radius:3px;
+  cursor:pointer;transition:background .15s,color .15s;
+  border:none;background:none;text-align:left;width:100%;
+}
+.sidebar-link:hover{background:var(--gold-dim);color:var(--cream)}
+.sidebar-link.active{background:var(--gold-dim);color:var(--gold);font-weight:500}
+.sidebar-link .sico{font-size:1rem;width:20px;text-align:center;flex-shrink:0}
+
+/* ─── CONTENT ─── */
+.menu-content{flex:1;padding:0;min-width:0}
+
+/* ─── SECTION ─── */
+.menu-section{padding:4rem 4vw 2rem;border-bottom:1px solid rgba(201,137,60,.07)}
+.menu-section:last-child{border-bottom:none}
+.sec-header{margin-bottom:2.5rem}
+.sec-eyebrow{display:inline-flex;align-items:center;gap:.6rem;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.sec-eyebrow::before{content:'';width:18px;height:1px;background:var(--gold)}
+.sec-title{font-family:var(--display);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:700;line-height:1.1;color:var(--white)}
+.sec-title i{font-style:italic;color:var(--gold);font-weight:400}
+.sec-desc{font-size:.88rem;color:var(--muted);margin-top:.6rem;line-height:1.65;max-width:500px;font-weight:300}
+
+/* ─── CARD GRID ─── */
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:1.5px;
+}
+.cards-grid.wide{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+
+/* ─── MENU CARD ─── */
+.mcard{
+  background:var(--ink2);overflow:hidden;
+  border:1px solid transparent;
+  transition:border-color .25s,background .25s,transform .25s var(--ease),box-shadow .25s;
+  cursor:default;position:relative;
+}
+.mcard:hover{
+  background:var(--ink3);
+  border-color:rgba(201,137,60,.25);
+  transform:translateY(-3px);
+  box-shadow:0 12px 40px rgba(0,0,0,.4);
+  z-index:2;
+}
+.mcard-img{height:200px;overflow:hidden;position:relative}
+.mcard-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease),filter .4s;filter:brightness(.82)}
+.mcard:hover .mcard-img img{transform:scale(1.07);filter:brightness(1)}
+.mcard-badge{
+  position:absolute;top:.75rem;left:.75rem;z-index:1;
+  background:var(--gold);color:var(--ink);
+  font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
+  padding:.25rem .6rem;border-radius:2px;
+}
+.mcard-body{padding:1.25rem 1.25rem 1.5rem}
+.mcard-name{font-family:var(--display);font-size:1.15rem;font-weight:600;color:var(--white);margin-bottom:.4rem;line-height:1.25}
+.mcard-desc{font-size:.8rem;color:var(--muted);line-height:1.6;font-weight:300}
+.mcard-tag{display:inline-block;margin-top:.75rem;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,137,60,.3);padding:.2rem .55rem;border-radius:1px}
+
+/* ─── DRINKS SECTION ─── */
+.drinks-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:1.5px;
+}
+.drink-card{
+  background:var(--ink2);overflow:hidden;
+  border:1px solid transparent;
+  transition:border-color .25s,background .25s,transform .2s var(--ease);
+  cursor:default;
+}
+.drink-card:hover{background:var(--ink3);border-color:rgba(201,137,60,.25);transform:translateY(-2px)}
+.drink-img{height:150px;overflow:hidden}
+.drink-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease),filter .3s;filter:brightness(.8)}
+.drink-card:hover .drink-img img{transform:scale(1.08);filter:brightness(1)}
+.drink-body{padding:1rem 1rem 1.25rem}
+.drink-name{font-family:var(--display);font-size:1rem;font-weight:600;color:var(--white);margin-bottom:.25rem}
+.drink-desc{font-size:.75rem;color:var(--muted);line-height:1.55;font-weight:300}
+
+/* ─── DRINKS CATEGORY LABEL ─── */
+.drinks-cat-label{
+  display:flex;align-items:center;gap:.75rem;
+  font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);margin:2rem 0 1.25rem;
+}
+.drinks-cat-label::after{content:'';flex:1;height:1px;background:rgba(201,137,60,.2)}
+
+/* ─── QUOTE BAND ─── */
+.quote-band{
+  position:relative;overflow:hidden;
+  padding:6rem 4vw;text-align:center;
+  margin:0;
+}
+.quote-band-bg{
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=1400&q=75') center/cover no-repeat;
+  filter:brightness(.18) saturate(.5);
+}
+.quote-band-content{position:relative}
+.qmark{font-family:var(--display);font-size:5rem;line-height:.4;color:var(--gold);opacity:.3;display:block;margin-bottom:1.5rem}
+.qtext{font-family:var(--display);font-size:clamp(1.4rem,3vw,2.2rem);font-style:italic;color:var(--white);line-height:1.45;max-width:680px;margin:0 auto 1.5rem}
+.qauthor{font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+
+/* ─── CTA BAND ─── */
+.cta-band{
+  background:var(--gold);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:3.5rem 4vw;gap:2rem;flex-wrap:wrap;
+}
+.cta-band h3{font-family:var(--display);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:700;color:var(--ink);line-height:1.1}
+.cta-band h3 i{font-style:italic;font-weight:400}
+.cta-band p{color:rgba(13,11,8,.55);font-size:.9rem;margin-top:.4rem;font-weight:300}
+.cta-actions{display:flex;gap:1rem;flex-wrap:wrap;flex-shrink:0}
+.btn-dark{background:var(--ink);color:var(--cream);font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.95rem 1.75rem;border-radius:2px;display:inline-flex;align-items:center;gap:.5rem;transition:background .2s,transform .15s;border:none;cursor:pointer}
+.btn-dark:hover{background:#2A2520;transform:translateY(-1px)}
+.btn-ink-outline{background:transparent;color:var(--ink);font-size:.8rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:.85rem 1.75rem;border-radius:2px;border:2px solid var(--ink);display:inline-block;transition:background .2s,color .2s}
+.btn-ink-outline:hover{background:var(--ink);color:var(--cream)}
+
+/* ─── FOOTER ─── */
+footer{background:var(--ink);padding:2.5rem 4vw;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;border-top:1px solid var(--gold-border)}
+.f-logo{font-family:var(--display);font-size:1.3rem;font-weight:700;color:var(--gold)}
+.f-logo em{color:var(--cream);font-style:italic;font-weight:400}
+.f-copy{font-size:.75rem;color:var(--muted2);letter-spacing:.04em}
+.f-links{display:flex;gap:2rem;list-style:none}
+.f-links a{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);transition:color .2s}
+.f-links a:hover{color:var(--gold)}
+
+/* ─── REVEAL ─── */
+.rv{opacity:0;transform:translateY(28px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.rv.vis{opacity:1;transform:none}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:920px){
+  .sidebar{display:none}
+  .menu-body{flex-direction:column}
+  .cards-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+}
+@media(max-width:600px){
+  .nav-right .nav-book{display:none}
+  .cards-grid,.cards-grid.wide{grid-template-columns:1fr 1fr}
+  .drinks-grid{grid-template-columns:1fr 1fr}
+  .mcard-img{height:160px}
+  footer{flex-direction:column;align-items:flex-start}
+  .cta-band{padding:2.5rem 4vw}
+}
+@media(max-width:400px){
+  .cards-grid,.cards-grid.wide,.drinks-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<nav id="topnav">
+  <a href="fryd-manglerud.html" class="nav-logo">Fryd <em>Manglerud</em></a>
+  <div class="nav-right">
+    <a href="fryd-manglerud.html" class="nav-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>
+      Forsiden
+    </a>
+    <a href="booking.html" class="nav-book">Bestill bord</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="menu-hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><span></span>Fryd Manglerud · Gastropub</div>
+    <h1>Vår <i>meny.</i></h1>
+    <p class="hero-sub">Comfort food laget med omhu – burgere, pizza, pasta, steak og mye mer.</p>
+  </div>
+</div>
+
+<!-- STICKY CAT NAV -->
+<nav id="catnav">
+  <div class="catnav-inner">
+    <button class="catnav-btn active" data-target="burgere">🍔 Burgere</button>
+    <button class="catnav-btn" data-target="pizza">🍕 Pizza</button>
+    <button class="catnav-btn" data-target="pasta">🍝 Pasta</button>
+    <button class="catnav-btn" data-target="tapas">🥗 Tapas</button>
+    <button class="catnav-btn" data-target="main">🍖 Hovedretter</button>
+    <button class="catnav-btn" data-target="salater">🥬 Salater</button>
+    <button class="catnav-btn" data-target="dessert">🍰 Dessert</button>
+    <button class="catnav-btn" data-target="drikke">🍷 Drikke</button>
+  </div>
+</nav>
+
+<div class="menu-body">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Mat</div>
+      <button class="sidebar-link active" data-target="burgere"><span class="sico">🍔</span>Smash Burgere</button>
+      <button class="sidebar-link" data-target="pizza"><span class="sico">🍕</span>Pizza</button>
+      <button class="sidebar-link" data-target="pasta"><span class="sico">🍝</span>Pasta</button>
+      <button class="sidebar-link" data-target="tapas"><span class="sico">🥗</span>Tapas & Forretter</button>
+      <button class="sidebar-link" data-target="main"><span class="sico">🍖</span>Hovedretter</button>
+      <button class="sidebar-link" data-target="salater"><span class="sico">🥬</span>Salater</button>
+      <button class="sidebar-link" data-target="dessert"><span class="sico">🍰</span>Desserter</button>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-heading">Drikke</div>
+      <button class="sidebar-link" data-target="drikke"><span class="sico">🍷</span>Drikke</button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="menu-content">
+
+    <!-- ── BURGERE ── -->
+    <section class="menu-section rv" id="burgere">
+      <div class="sec-header">
+        <div class="sec-eyebrow">Smash Burgers</div>
+        <h2 class="sec-title">Håndlagde <i>burgere.</i></h2>
+        <p class="sec-desc">Alle burgerne våre er smash-style – presset hardt mot grillplaten for maksimal stekeskorpe og umami-smak.</p>
+      </div>
+      <div class="cards-grid">
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=85" alt="Smash Fryd Burger"/>
+            <span class="mcard-badge">Signatur</span>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Smash Fryd Burger</div>
+            <div class="mcard-desc">Dobbel smash patty, cheddar, crispy bacon og jalapeño mayo på brioche-bun.</div>
+            <span class="mcard-tag">Bestselger</span>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=600&q=85" alt="Smash Chevre Burger"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Smash Chevre Burger</div>
+            <div class="mcard-desc">Kremet geitost og rødbete chutney. Annerledes, elegant og utrolig god.</div>
+            <span class="mcard-tag">Spesial</span>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1520072959219-c595dc870360?w=600&q=85" alt="Smash Blue Burger"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Smash Blue Burger</div>
+            <div class="mcard-desc">Gorgonzola og crispy bacon. Intens, salt og deilig – for de modige.</div>
+            <span class="mcard-tag">Bold</span>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=600&q=85" alt="Chicken Burger"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Chicken Burger</div>
+            <div class="mcard-desc">Sprøstekt kyllingfilet, coleslaw og sriracha mayo på ristet brioche.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&q=85" alt="Veggie Burger"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Veggie Burger</div>
+            <div class="mcard-desc">Håndlaget vegetarpatty, avokadokrem, grillet paprika og ruccola.</div>
+            <span class="mcard-tag">Vegetar</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── PIZZA ── -->
+    <section class="menu-section rv" id="pizza">
+      <div class="sec-header">
+        <div class="sec-eyebrow">Pizza</div>
+        <h2 class="sec-title">Steinovns<i>pizza.</i></h2>
+        <p class="sec-desc">Tynne, sprø bunner med premium ingredienser. Bakt til perfeksjon.</p>
+      </div>
+      <div class="cards-grid">
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=85" alt="Pepperoni"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Pepperoni</div>
+            <div class="mcard-desc">Tomatbunn, fior di latte og rikelig med pepperoni. En evig klassiker.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&q=85" alt="Palermo"/>
+            <span class="mcard-badge">Anbefalt</span>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Palermo</div>
+            <div class="mcard-desc">Serrano, parmesan og fersk ruccola. Elegant, salt og balansert.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&q=85" alt="Five Cheeses"/>
+            <span class="mcard-badge">Fan-favoritt</span>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Five Cheeses</div>
+            <div class="mcard-desc">Mozzarella, cheddar, parmesan, gorgonzola og ricotta. For oste-elskeren.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1548369937-47519962c11a?w=600&q=85" alt="Pollo"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Pollo</div>
+            <div class="mcard-desc">Grillet kylling, rødløk, paprika og pesto bianco.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=600&q=85" alt="Truffle Pizza"/>
+            <span class="mcard-badge">Premium</span>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Truffle Pizza</div>
+            <div class="mcard-desc">Trøffelkrem, parmesan, ruccola og dryss av trøffelolje. Luksuriøst.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=600&q=85" alt="Margherita"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Margherita</div>
+            <div class="mcard-desc">San Marzano-tomat, fior di latte og fersk basilikum. Enkelt og perfekt.</div>
+            <span class="mcard-tag">Vegetar</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── PASTA ── -->
+    <section class="menu-section rv" id="pasta">
+      <div class="sec-header">
+        <div class="sec-eyebrow">Pasta</div>
+        <h2 class="sec-title">Håndlaget <i>pasta.</i></h2>
+        <p class="sec-desc">Freskt laget pasta med sauser som har kokt lenge og smaker dypt.</p>
+      </div>
+      <div class="cards-grid">
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=600&q=85" alt="Pappardelle Entrecôte"/>
+            <span class="mcard-badge">Anbefalt</span>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Pappardelle Entrecôte</div>
+            <div class="mcard-desc">Tynne pappardelle-bånd med skiveskåret entrecôte, trøffel og kremet saus.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&q=85" alt="Bolognese"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Bolognese</div>
+            <div class="mcard-desc">Langkokt kjøttsaus med fersk tagliatelle og revet parmesan.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1612874742237-6526221588e3?w=600&q=85" alt="Carbonara"/>
+            <span class="mcard-badge">Klassiker</span>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Carbonara</div>
+            <div class="mcard-desc">Guanciale, eggeplomme, pecorino og nykvernet pepper. Gjort riktig.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=600&q=85" alt="Pollo Pasta"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Pollo Pasta</div>
+            <div class="mcard-desc">Saftig grillet kylling i kremet paprikasaus med penne.</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── TAPAS ── -->
+    <section class="menu-section rv" id="tapas">
+      <div class="sec-header">
+        <div class="sec-eyebrow">Tapas & Forretter</div>
+        <h2 class="sec-title">Del og <i>nyt.</i></h2>
+        <p class="sec-desc">Perfekt til å dele rundt bordet – eller som en lett middag alene.</p>
+      </div>
+      <div class="cards-grid">
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&q=85" alt="Calamari"/>
+            <span class="mcard-badge">Populær</span>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Calamari</div>
+            <div class="mcard-desc">Sprøstekte blækspruttringer med aioli og sitron.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1548340748-6c34b677b2b5?w=600&q=85" alt="Jalapeño Poppers"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Jalapeño Poppers</div>
+            <div class="mcard-desc">Panerte jalapeños fylt med kremost og cheddar. Crispy og spicy.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1531749668029-2db88e4276c7?w=600&q=85" alt="Mozzarella Sticks"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Mozzarella Sticks</div>
+            <div class="mcard-desc">Panert mozzarella, crispy utenpå og smeltet inni. Serveres med marinara.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=600&q=85" alt="Truffle Fries"/>
+            <span class="mcard-badge">Favoritt</span>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Truffle Fries</div>
+            <div class="mcard-desc">Pommes frites med trøffelolje, parmesan og fersk persille.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=600&q=85" alt="Sweet Potato Fries"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Sweet Potato Fries</div>
+            <div class="mcard-desc">Crispy søtpotet-fries med sriracha dip.</div>
+            <span class="mcard-tag">Vegetar</span>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1549931319-a545dcf3bc73?w=600&q=85" alt="Focaccia"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Focaccia</div>
+            <div class="mcard-desc">Hjemmelaget focaccia med rosmarin, flaksalt og aioli.</div>
+            <span class="mcard-tag">Vegetar</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── MAIN COURSES ── -->
+    <section class="menu-section rv" id="main">
+      <div class="sec-header">
+        <div class="sec-eyebrow">Klassikere</div>
+        <h2 class="sec-title">Ekte <i>hovedretter.</i></h2>
+        <p class="sec-desc">Tidløse retter laget med råvarer av høy kvalitet og respekt for teknikk.</p>
+      </div>
+      <div class="cards-grid wide">
+
+        <div class="mcard">
+          <div class="mcard-img" style="height:220px">
+            <img src="https://images.unsplash.com/photo-1432139509613-5c4255815697?w=700&q=85" alt="Entrecôte"/>
+            <span class="mcard-badge">Premium</span>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Entrecôte</div>
+            <div class="mcard-desc">Saftig entrecôte grillet til perfeksjon, servert med trøffel jus, grillet asparges og pommes frites.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img" style="height:220px">
+            <img src="https://images.unsplash.com/photo-1544982503-9f984c14501a?w=700&q=85" alt="BBQ Ribs"/>
+            <span class="mcard-badge">Bestseller</span>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">BBQ Ribs</div>
+            <div class="mcard-desc">Møre ribs langstekt i 12 timer og glasert med huslagd BBQ-saus. Serveres med coleslaw og fries.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img" style="height:220px">
+            <img src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=700&q=85" alt="Fish & Chips"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Fish &amp; Chips</div>
+            <div class="mcard-desc">Sprøstekt torsk i øldeig med crispy chips, remoulade og ertepuré.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img" style="height:220px">
+            <img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=700&q=85" alt="Grillet Kylling"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Grillet Kylling</div>
+            <div class="mcard-desc">Hel grillet kyllingbryst med sitronurt marinade, rotgrønnsaker og tzatziki.</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── SALATER ── -->
+    <section class="menu-section rv" id="salater">
+      <div class="sec-header">
+        <div class="sec-eyebrow">Salater</div>
+        <h2 class="sec-title">Friskt og <i>grønt.</i></h2>
+        <p class="sec-desc">Lette, friske salater – som forrett, tilbehør eller som et komplett måltid.</p>
+      </div>
+      <div class="cards-grid">
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1546793665-c74683f339c1?w=600&q=85" alt="Caesar Salad"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Caesar Salad</div>
+            <div class="mcard-desc">Romaine, parmesan, krutonger og klassisk caesar-dressing. Kan ha grillet kylling.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&q=85" alt="Halloumi Salad"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Halloumi Salad</div>
+            <div class="mcard-desc">Grillet halloumi, vannmelon, mynte og balsamico-glaze på blandet salat.</div>
+            <span class="mcard-tag">Vegetar</span>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=600&q=85" alt="Chevre Salad"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Chevre Salad</div>
+            <div class="mcard-desc">Varm geitost, valnøtter, honning og søt balsamico på sprø salatbunn.</div>
+            <span class="mcard-tag">Vegetar</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── DESSERT ── -->
+    <section class="menu-section rv" id="dessert">
+      <div class="sec-header">
+        <div class="sec-eyebrow">Desserter</div>
+        <h2 class="sec-title">Søt <i>avslutning.</i></h2>
+        <p class="sec-desc">For dem som vil avslutte kvelden på riktig måte.</p>
+      </div>
+      <div class="cards-grid">
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=600&q=85" alt="Chocolate Fondant"/>
+            <span class="mcard-badge">Favoritt</span>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Chocolate Fondant</div>
+            <div class="mcard-desc">Varm sjokoladekake med flytende kjerne og vanilje-is. Rett og slett uslåelig.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=600&q=85" alt="Cheesecake"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Cheesecake</div>
+            <div class="mcard-desc">New York cheesecake med bærkompott og Graham kjeks-bunn.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=600&q=85" alt="Ice Cream"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Ice Cream</div>
+            <div class="mcard-desc">Tre kuler premium iskrem – spør servitøren om dagens smak.</div>
+          </div>
+        </div>
+
+        <div class="mcard">
+          <div class="mcard-img">
+            <img src="https://images.unsplash.com/photo-1568571780765-9276ac8b75a2?w=600&q=85" alt="Apple Cake"/>
+          </div>
+          <div class="mcard-body">
+            <div class="mcard-name">Apple Cake</div>
+            <div class="mcard-desc">Hjemmelaget eplekake med kanel, karamellsaus og crème fraîche.</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── QUOTE ── -->
+    <div class="quote-band rv">
+      <div class="quote-band-bg"></div>
+      <div class="quote-band-content">
+        <span class="qmark">"</span>
+        <p class="qtext">Vi lager mat vi selv vil spise – raust, smakfullt og alltid med hjerte.</p>
+        <span class="qauthor">Fryd Manglerud – kjøkkenet</span>
+      </div>
+    </div>
+
+    <!-- ── DRIKKE ── -->
+    <section class="menu-section rv" id="drikke">
+      <div class="sec-header">
+        <div class="sec-eyebrow">Drikke</div>
+        <h2 class="sec-title">Drikke for <i>enhver smak.</i></h2>
+        <p class="sec-desc">Fra alkoholfritt til cocktails – vi har noe for deg uansett hva du er i humør for.</p>
+      </div>
+
+      <div class="drinks-cat-label">🥤 Brus & Juice</div>
+      <div class="drinks-grid">
+        <div class="drink-card">
+          <div class="drink-img"><img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&q=80" alt="Coca Cola"/></div>
+          <div class="drink-body"><div class="drink-name">Coca-Cola</div><div class="drink-desc">Den klassiske originalen, alltid iskald.</div></div>
+        </div>
+        <div class="drink-card">
+          <div class="drink-img"><img src="https://images.unsplash.com/photo-1554866585-cd94860890b7?w=400&q=80" alt="Cola Zero"/></div>
+          <div class="drink-body"><div class="drink-name">Cola Zero</div><div class="drink-desc">Sukkerfri, full smak.</div></div>
+        </div>
+        <div class="drink-card">
+          <div class="drink-img"><img src="https://images.unsplash.com/photo-1583064313642-a7c149480c7e?w=400&q=80" alt="Fanta"/></div>
+          <div class="drink-body"><div class="drink-name">Fanta</div><div class="drink-desc">Frisk og søt appelsinbrus.</div></div>
+        </div>
+        <div class="drink-card">
+          <div class="drink-img"><img src="https://images.unsplash.com/photo-1553361371-9b22f78e8b1d?w=400&q=80" alt="Juice"/></div>
+          <div class="drink-body"><div class="drink-name">Juice</div><div class="drink-desc">Presset appelsin- eller eple­juice.</div></div>
+        </div>
+      </div>
+
+      <div class="drinks-cat-label">☕ Kaffe</div>
+      <div class="drinks-grid">
+        <div class="drink-card">
+          <div class="drink-img"><img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=400&q=80" alt="Espresso"/></div>
+          <div class="drink-body"><div class="drink-name">Espresso</div><div class="drink-desc">Dobbel shot, intens og rik.</div></div>
+        </div>
+        <div class="drink-card">
+          <div class="drink-img"><img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=400&q=80" alt="Cappuccino"/></div>
+          <div class="drink-body"><div class="drink-name">Cappuccino</div><div class="drink-desc">Espresso, varm melk og fløyelsmyk skum.</div></div>
+        </div>
+        <div class="drink-card">
+          <div class="drink-img"><img src="https://images.unsplash.com/photo-1593443320739-77f74939d0da?w=400&q=80" alt="Latte"/></div>
+          <div class="drink-body"><div class="drink-name">Latte</div><div class="drink-desc">Mild espresso med dampet melk og latte art.</div></div>
+        </div>
+      </div>
+
+      <div class="drinks-cat-label">🍺 Øl</div>
+      <div class="drinks-grid">
+        <div class="drink-card">
+          <div class="drink-img"><img src="https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=400&q=80" alt="Pilsner"/></div>
+          <div class="drink-body"><div class="drink-name">Pilsner</div><div class="drink-desc">Frisk og lett – perfekt til burgere.</div></div>
+        </div>
+        <div class="drink-card">
+          <div class="drink-img"><img src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&q=80" alt="IPA"/></div>
+          <div class="drink-body"><div class="drink-name">IPA</div><div class="drink-desc">Humlerik og aromatisk craft beer.</div></div>
+        </div>
+        <div class="drink-card">
+          <div class="drink-img"><img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?w=400&q=80" alt="Fatøl"/></div>
+          <div class="drink-body"><div class="drink-name">Fatøl</div><div class="drink-desc">Spør om ukens fat – alltid friskt og kaldt.</div></div>
+        </div>
+      </div>
+
+      <div class="drinks-cat-label">🍷 Vin</div>
+      <div class="drinks-grid">
+        <div class="drink-card">
+          <div class="drink-img"><img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=400&q=80" alt="Rødvin"/></div>
+          <div class="drink-body"><div class="drink-name">Rødvin</div><div class="drink-desc">Utvalgte rødviner – glass eller flaske.</div></div>
+        </div>
+        <div class="drink-card">
+          <div class="drink-img"><img src="https://images.unsplash.com/photo-1474722883778-792e7990302f?w=400&q=80" alt="Hvitvin"/></div>
+          <div class="drink-body"><div class="drink-name">Hvitvin</div><div class="drink-desc">Frisk og fruktig hvitvin fra Europas vinregioner.</div></div>
+        </div>
+        <div class="drink-card">
+          <div class="drink-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Rosé"/></div>
+          <div class="drink-body"><div class="drink-name">Rosé</div><div class="drink-desc">Tørr og elegant rosé, perfekt til mat.</div></div>
+        </div>
+      </div>
+
+      <div class="drinks-cat-label">🍸 Cocktails</div>
+      <div class="drinks-grid">
+        <div class="drink-card">
+          <div class="drink-img"><img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=400&q=80" alt="Espresso Martini"/><span class="mcard-badge" style="position:absolute;top:.6rem;left:.6rem">Bestselger</span></div>
+          <div class="drink-body"><div class="drink-name">Espresso Martini</div><div class="drink-desc">Vodka, espresso, kahlúa og sukkersirup. Legendarisk.</div></div>
+        </div>
+        <div class="drink-card">
+          <div class="drink-img"><img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=400&q=80" alt="Mojito"/></div>
+          <div class="drink-body"><div class="drink-name">Mojito</div><div class="drink-desc">Rom, lime, mynte, sukker og sodavann. Klassisk og frisk.</div></div>
+        </div>
+        <div class="drink-card">
+          <div class="drink-img"><img src="https://images.unsplash.com/photo-1541614101331-1a5a3a194e92?w=400&q=80" alt="Aperol Spritz"/></div>
+          <div class="drink-body"><div class="drink-name">Aperol Spritz</div><div class="drink-desc">Aperol, prosecco og sodavann med appelsinskive.</div></div>
+        </div>
+        <div class="drink-card">
+          <div class="drink-img"><img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=400&q=80" alt="Gin & Tonic"/></div>
+          <div class="drink-body"><div class="drink-name">Gin &amp; Tonic</div><div class="drink-desc">Premium gin med premium tonic og botanicals.</div></div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ── CTA ── -->
+    <div class="cta-band rv">
+      <div>
+        <h3>Klar for å <i>bestille bord?</i></h3>
+        <p>Ring oss eller bruk vår online booking. Walk-in alltid velkommen.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="booking.html" class="btn-dark">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Bestill bord
+        </a>
+        <a href="fryd-manglerud.html" class="btn-ink-outline">Tilbake til forsiden</a>
+      </div>
+    </div>
+
+  </div><!-- /menu-content -->
+</div><!-- /menu-body -->
+
+<footer>
+  <div class="f-logo">Fryd <em>Manglerud</em></div>
+  <p class="f-copy">© 2025 Fryd Manglerud AS · Plogveien 6, 0679 Oslo</p>
+  <ul class="f-links">
+    <li><a href="fryd-manglerud.html">Hjem</a></li>
+    <li><a href="booking.html">Bestill bord</a></li>
+    <li><a href="fryd-manglerud.html#kontakt">Kontakt</a></li>
+  </ul>
+</footer>
+
+<script>
+/* ── Sticky catnav + sidebar active state on scroll ── */
+const sections = document.querySelectorAll('.menu-section');
+const catBtns = document.querySelectorAll('.catnav-btn');
+const sideLinks = document.querySelectorAll('.sidebar-link');
+const topnavH = 68, catnavH = 42;
+const offset = topnavH + catnavH + 20;
+
+function setActive(id){
+  catBtns.forEach(b => b.classList.toggle('active', b.dataset.target === id));
+  sideLinks.forEach(l => l.classList.toggle('active', l.dataset.target === id));
+}
+
+const ioOpts = {rootMargin: `-${offset}px 0px -55% 0px`};
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) setActive(e.target.id); });
+}, ioOpts);
+sections.forEach(s => io.observe(s));
+
+/* ── Click to scroll ── */
+function scrollToSection(id){
+  const el = document.getElementById(id);
+  if(!el) return;
+  const y = el.getBoundingClientRect().top + window.scrollY - offset + 10;
+  window.scrollTo({top: y, behavior:'smooth'});
+}
+catBtns.forEach(b => b.addEventListener('click', () => scrollToSection(b.dataset.target)));
+sideLinks.forEach(l => l.addEventListener('click', () => scrollToSection(l.dataset.target)));
+
+/* ── Scroll reveal ── */
+const rvEls = document.querySelectorAll('.rv');
+const rvObs = new IntersectionObserver(entries => entries.forEach(e => {
+  if(e.isIntersecting){ e.target.classList.add('vis'); rvObs.unobserve(e.target); }
+}), {threshold:.07});
+rvEls.forEach(el => rvObs.observe(el));
+</script>
+</body>
+</html>
