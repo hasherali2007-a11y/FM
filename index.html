@@ -30,10 +30,10 @@ html{scroll-behavior:smooth;font-size:16px}
 body{font-family:var(--body);background:var(--ink);color:var(--cream);overflow-x:hidden;-webkit-font-smoothing:antialiased}
 img{display:block;max-width:100%}
 a{text-decoration:none;color:inherit}
- 
+
 /* NOISE */
 body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.025;mix-blend-mode:overlay}
- 
+
 /* NAV */
 #nav{position:fixed;top:0;left:0;right:0;z-index:900;height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 4vw;transition:background .4s var(--ease),box-shadow .4s}
 #nav.scrolled{background:rgba(13,11,8,.9);backdrop-filter:blur(24px);box-shadow:0 1px 0 rgba(201,137,60,.15)}
@@ -54,7 +54,7 @@ body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
 .mob-menu a{display:block;font-size:1.5rem;font-family:var(--display);font-weight:600;color:var(--cream);padding:1rem 0;border-bottom:1px solid rgba(201,137,60,.12);transition:color .2s,padding-left .2s}
 .mob-menu a:hover{color:var(--gold);padding-left:.75rem}
 .mob-cta{margin-top:1.5rem;background:var(--gold) !important;color:var(--ink) !important;font-family:var(--body) !important;font-size:.85rem !important;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:1rem 1.5rem !important;border-radius:2px;text-align:center;border-bottom:none !important}
- 
+
 /* HERO */
 .hero{position:relative;height:100svh;min-height:640px;display:flex;align-items:flex-end;padding:0 4vw 11vh;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1600891964092-4316c288032e?w=1800&q=85') center/cover no-repeat;transform:scale(1.08);animation:hzoom 9s var(--ease) forwards}
@@ -82,7 +82,7 @@ body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
 .hero-bar-item strong{color:var(--cream);font-weight:500}
 @keyframes fup{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
 @keyframes fadein{from{opacity:0}to{opacity:1}}
- 
+
 /* SECTIONS */
 .sec{padding:8rem 4vw}
 .inner{max-width:1240px;margin:0 auto}
@@ -91,7 +91,7 @@ body::before{content:'';position:fixed;inset:0;z-index:1000;pointer-events:none;
 h2.display{font-family:var(--display);font-size:clamp(2.2rem,4.5vw,3.6rem);font-weight:700;line-height:1.1;color:var(--white);margin-bottom:1.25rem}
 h2.display i{font-style:italic;color:var(--gold);font-weight:400}
 .body-text{font-size:1rem;line-height:1.8;color:var(--muted);font-weight:300;max-width:520px}
- 
+
 /* ABOUT */
 .about-sec{background:var(--ink2)}
 .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
@@ -106,7 +106,7 @@ h2.display i{font-style:italic;color:var(--gold);font-weight:400}
 .stats-row{display:flex;gap:2.5rem;margin-top:2.5rem;flex-wrap:wrap}
 .stat-n{font-family:var(--display);font-size:2.6rem;font-weight:700;color:var(--gold);display:block;line-height:1}
 .stat-l{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-top:.35rem;display:block}
- 
+
 /* FEATURED */
 .featured-sec{background:var(--ink);overflow:hidden}
 .featured-intro{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3.5rem;flex-wrap:wrap;gap:1.5rem}
@@ -125,7 +125,7 @@ h2.display i{font-style:italic;color:var(--gold);font-weight:400}
 .dish-cat{font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
 .dish-arrow{width:30px;height:30px;border-radius:50%;border:1px solid rgba(201,137,60,.3);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:.8rem;transition:background .2s,border-color .2s}
 .dish-card:hover .dish-arrow{background:var(--gold);border-color:var(--gold);color:var(--ink)}
- 
+
 /* FULL MENU */
 .menu-sec{background:var(--ink2)}
 .menu-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:3rem;border-bottom:1px solid rgba(201,137,60,.12);padding-bottom:0}
@@ -143,7 +143,7 @@ h2.display i{font-style:italic;color:var(--gold);font-weight:400}
 .menu-item-name{font-family:var(--display);font-size:1.1rem;font-weight:600;color:var(--white);margin-bottom:.35rem;line-height:1.25}
 .menu-item-desc{font-size:.8rem;color:var(--muted);line-height:1.6;font-weight:300}
 .menu-item-tag{display:inline-block;margin-top:.75rem;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,137,60,.3);padding:.2rem .55rem;border-radius:1px}
- 
+
 /* MOSAIC */
 .mosaic{background:var(--ink);padding:0}
 .mosaic-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;grid-template-rows:380px 280px;gap:4px}
@@ -158,7 +158,7 @@ h2.display i{font-style:italic;color:var(--gold);font-weight:400}
 .mos:nth-child(3){grid-column:3;grid-row:1}
 .mos:nth-child(4){grid-column:2;grid-row:2}
 .mos:nth-child(5){grid-column:3;grid-row:2}
- 
+
 /* QUOTE */
 .quote-sec{position:relative;overflow:hidden;padding:10rem 4vw;text-align:center}
 .quote-bg{position:absolute;inset:-10%;background:url('https://images.unsplash.com/photo-1550966871-3ed3cfd18ef4?w=1600&q=80') center/cover no-repeat;filter:brightness(.25) saturate(.6);transform:translateZ(0)}
@@ -166,7 +166,7 @@ h2.display i{font-style:italic;color:var(--gold);font-weight:400}
 .quote-mark{font-family:var(--display);font-size:6rem;line-height:.5;color:var(--gold);opacity:.35;margin-bottom:1.5rem;display:block}
 .quote-text{font-family:var(--display);font-size:clamp(1.6rem,3.5vw,2.6rem);font-style:italic;font-weight:400;color:var(--white);line-height:1.4;margin-bottom:2rem}
 .quote-author{font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
- 
+
 /* BOOKING BAND */
 .book-band{background:var(--gold);display:flex;align-items:center;justify-content:space-between;padding:4rem 4vw;gap:2rem;flex-wrap:wrap}
 .book-band-text h3{font-family:var(--display);font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:700;color:var(--ink);line-height:1.1}
@@ -177,7 +177,7 @@ h2.display i{font-style:italic;color:var(--gold);font-weight:400}
 .btn-ink:hover{background:var(--ink3);transform:translateY(-1px)}
 .btn-ink-outline{background:transparent;color:var(--ink);font-size:.8rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;padding:.9rem 2rem;border-radius:2px;border:2px solid var(--ink);cursor:pointer;display:inline-block;transition:background .2s,color .2s,transform .15s}
 .btn-ink-outline:hover{background:var(--ink);color:var(--cream);transform:translateY(-1px)}
- 
+
 /* HOURS */
 .hours-sec{background:var(--ink2)}
 .hours-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;align-items:start}
@@ -195,7 +195,7 @@ h2.display i{font-style:italic;color:var(--gold);font-weight:400}
 .hours-img-stack img:first-child{width:100%;height:440px;object-fit:cover;border-radius:2px;display:block;filter:brightness(.9)}
 .hours-img-float{position:absolute;bottom:-2rem;right:-1.5rem;width:160px;height:160px;border-radius:2px;overflow:hidden;border:3px solid var(--ink2);box-shadow:0 8px 32px rgba(0,0,0,.5)}
 .hours-img-float img{width:100%;height:100%;object-fit:cover}
- 
+
 /* CONTACT */
 .contact-sec{background:var(--ink2);padding:8rem 4vw 0}
 .contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:5rem;align-items:start}
@@ -210,7 +210,7 @@ h2.display i{font-style:italic;color:var(--gold);font-weight:400}
 .c-val a:hover{opacity:.75}
 .contact-map{height:100%;min-height:480px}
 .contact-map iframe{width:100%;height:100%;border:none;display:block;filter:grayscale(30%) contrast(1.05) brightness(.85);border-radius:2px 2px 0 0}
- 
+
 /* FOOTER */
 footer{background:var(--ink);padding:3rem 4vw;display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;border-top:1px solid rgba(201,137,60,.1)}
 .f-logo{font-family:var(--display);font-size:1.3rem;font-weight:700;color:var(--gold)}
@@ -219,17 +219,17 @@ footer{background:var(--ink);padding:3rem 4vw;display:flex;align-items:center;ju
 .f-links{display:flex;gap:2rem;list-style:none}
 .f-links a{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);transition:color .2s}
 .f-links a:hover{color:var(--gold)}
- 
+
 /* STICKY BOOK */
 .sticky-book{display:none;position:fixed;bottom:1.25rem;left:50%;transform:translateX(-50%);z-index:800;white-space:nowrap;background:var(--gold);color:var(--ink);font-size:.82rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:.9rem 2.5rem;border-radius:50px;box-shadow:0 6px 30px rgba(201,137,60,.5);transition:transform .2s,box-shadow .2s,opacity .3s;opacity:0}
 .sticky-book:hover{transform:translateX(-50%) translateY(-2px);box-shadow:0 10px 40px rgba(201,137,60,.6)}
- 
+
 /* REVEAL */
 .rv{opacity:0;transform:translateY(36px);transition:opacity .75s var(--ease),transform .75s var(--ease)}
 .rv.vis{opacity:1;transform:none}
 .rv2{opacity:0;transform:translateY(36px);transition:opacity .75s .15s var(--ease),transform .75s .15s var(--ease)}
 .rv2.vis{opacity:1;transform:none}
- 
+
 /* RESPONSIVE */
 @media(max-width:1000px){
   .about-grid{grid-template-columns:1fr;gap:3rem}
@@ -271,7 +271,7 @@ footer{background:var(--ink);padding:3rem 4vw;display:flex;align-items:center;ju
 </style>
 </head>
 <body>
- 
+
 <nav id="nav">
   <a href="#" class="nav-logo">Fryd <em>Manglerud</em></a>
   <ul class="nav-links">
@@ -279,19 +279,19 @@ footer{background:var(--ink);padding:3rem 4vw;display:flex;align-items:center;ju
     <li><a href="#meny">Meny</a></li>
     <li><a href="#apningstider">Åpent</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
-    <li><a href="tel:+4793400275" class="nav-book">Bestill bord</a></li>
+    <li><a href="booking.html" class="nav-book">Bestill bord</a></li>
   </ul>
   <button class="hbg" id="hbg" aria-label="Åpne meny"><span></span><span></span><span></span></button>
 </nav>
- 
+
 <nav class="mob-menu" id="mobMenu">
   <a href="#om" class="mob-link">Om oss</a>
   <a href="#meny" class="mob-link">Meny</a>
   <a href="#apningstider" class="mob-link">Åpningstider</a>
   <a href="#kontakt" class="mob-link">Kontakt</a>
-  <a href="tel:+4793400275" class="mob-cta">📞 Ring og bestill bord</a>
+  <a href="booking.html" class="mob-cta">📞 Ring og bestill bord</a>
 </nav>
- 
+
 <!-- HERO -->
 <section class="hero" id="hjem">
   <div class="hero-bg"></div>
@@ -304,7 +304,7 @@ footer{background:var(--ink);padding:3rem 4vw;display:flex;align-items:center;ju
     <h1>Ekte mat.<br><i>Ekte glede.</i></h1>
     <p class="hero-desc">Comfort food laget med sjel, servert i en atmosfære du vil elske. Velkommen til Fryd Manglerud – stedet du alltid vil komme tilbake til.</p>
     <div class="hero-ctas">
-      <a href="tel:+4793400275" class="btn-gold">Bestill bord</a>
+      <a href="booking.html" class="btn-gold">Bestill bord</a>
       <a href="#meny" class="btn-outline">Se hele menyen</a>
     </div>
   </div>
@@ -323,7 +323,7 @@ footer{background:var(--ink);padding:3rem 4vw;display:flex;align-items:center;ju
     </div>
   </div>
 </section>
- 
+
 <!-- OM OSS -->
 <section class="about-sec sec" id="om">
   <div class="inner">
@@ -348,7 +348,7 @@ footer{background:var(--ink);padding:3rem 4vw;display:flex;align-items:center;ju
     </div>
   </div>
 </section>
- 
+
 <!-- FEATURED -->
 <section class="featured-sec sec" id="favoritter">
   <div class="inner">
@@ -411,7 +411,7 @@ footer{background:var(--ink);padding:3rem 4vw;display:flex;align-items:center;ju
     </div>
   </div>
 </section>
- 
+
 <!-- FULL MENU -->
 <section class="menu-sec sec" id="meny">
   <div class="inner">
@@ -426,13 +426,13 @@ footer{background:var(--ink);padding:3rem 4vw;display:flex;align-items:center;ju
       <button class="tab" data-cat="klassikere">Klassikere</button>
       <button class="tab" data-cat="salater">Salater</button>
     </div>
- 
+
     <div class="menu-cat active" id="cat-burgere">
       <div class="menu-item"><div class="menu-item-img"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300&q=80" alt="Fryd Burger"/></div><div class="menu-item-body"><div class="menu-item-name">Smash Fryd Burger</div><div class="menu-item-desc">Bacon, cheddar og jalapeño mayo. Vår signaturburger.</div><span class="menu-item-tag">Signatur</span></div></div>
       <div class="menu-item"><div class="menu-item-img"><img src="https://images.unsplash.com/photo-1586190848861-99aa4a171e90?w=300&q=80" alt="Chevre Burger"/></div><div class="menu-item-body"><div class="menu-item-name">Smash Chevre Burger</div><div class="menu-item-desc">Geitost og rødbete chutney. Annerledes og deilig.</div><span class="menu-item-tag">Spesial</span></div></div>
       <div class="menu-item"><div class="menu-item-img"><img src="https://images.unsplash.com/photo-1520072959219-c595dc870360?w=300&q=80" alt="Blue Burger"/></div><div class="menu-item-body"><div class="menu-item-name">Smash Blue Burger</div><div class="menu-item-desc">Blåmuggost og bacon. For de modige.</div><span class="menu-item-tag">Bold</span></div></div>
     </div>
- 
+
     <div class="menu-cat" id="cat-pizza">
       <div class="menu-item"><div class="menu-item-img"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=300&q=80" alt="Pepperoni"/></div><div class="menu-item-body"><div class="menu-item-name">Pepperoni</div><div class="menu-item-desc">Tomatbunn, mozzarella og pepperoni. Klassisk og alltid god.</div></div></div>
       <div class="menu-item"><div class="menu-item-img"><img src="https://images.unsplash.com/photo-1548369937-47519962c11a?w=300&q=80" alt="Pollo"/></div><div class="menu-item-body"><div class="menu-item-name">Pollo</div><div class="menu-item-desc">Smakfull kyllingpizza med friske ingredienser.</div></div></div>
@@ -440,20 +440,20 @@ footer{background:var(--ink);padding:3rem 4vw;display:flex;align-items:center;ju
       <div class="menu-item"><div class="menu-item-img"><img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=300&q=80" alt="Five Cheeses"/></div><div class="menu-item-body"><div class="menu-item-name">Five Cheeses</div><div class="menu-item-desc">Fem oster for deg som aldri kan få nok smak.</div><span class="menu-item-tag">Fan-favoritt</span></div></div>
       <div class="menu-item"><div class="menu-item-img"><img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=300&q=80" alt="Vegetar"/></div><div class="menu-item-body"><div class="menu-item-name">Vegetar</div><div class="menu-item-desc">Friske grønnsaker og god ost. Uten kjøtt, fullt av smak.</div></div></div>
     </div>
- 
+
     <div class="menu-cat" id="cat-pasta">
       <div class="menu-item"><div class="menu-item-img"><img src="https://images.unsplash.com/photo-1588166524941-3bf61a9c41db?w=300&q=80" alt="Pappardelle"/></div><div class="menu-item-body"><div class="menu-item-name">Pappardelle Entrecôte</div><div class="menu-item-desc">Trøffel og kremet saus. Vår mest luksusiøse pastarett.</div><span class="menu-item-tag">Anbefalt</span></div></div>
       <div class="menu-item"><div class="menu-item-img"><img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=300&q=80" alt="Bolognese"/></div><div class="menu-item-body"><div class="menu-item-name">Bolognese</div><div class="menu-item-desc">Hjemmelaget kjøttsaus, lang koketid og dyp smak.</div></div></div>
       <div class="menu-item"><div class="menu-item-img"><img src="https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?w=300&q=80" alt="Pollo Pasta"/></div><div class="menu-item-body"><div class="menu-item-name">Pollo Pasta</div><div class="menu-item-desc">Saftig kylling i smakfull kremsaus.</div></div></div>
     </div>
- 
+
     <div class="menu-cat" id="cat-klassikere">
       <div class="menu-item"><div class="menu-item-img"><img src="https://images.unsplash.com/photo-1432139509613-5c4255815697?w=300&q=80" alt="Entrecôte"/></div><div class="menu-item-body"><div class="menu-item-name">Entrecôte Steak</div><div class="menu-item-desc">Grillet til din ønskede temperatur med klassisk tilbehør.</div><span class="menu-item-tag">Premium</span></div></div>
       <div class="menu-item"><div class="menu-item-img"><img src="https://images.unsplash.com/photo-1544982503-9f984c14501a?w=300&q=80" alt="BBQ Ribs"/></div><div class="menu-item-body"><div class="menu-item-name">BBQ Ribs</div><div class="menu-item-desc">Mør ribs med eget BBQ-glasur. Fingerlicking good.</div><span class="menu-item-tag">Fan-favoritt</span></div></div>
       <div class="menu-item"><div class="menu-item-img"><img src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=300&q=80" alt="Fish & Chips"/></div><div class="menu-item-body"><div class="menu-item-name">Fish &amp; Chips</div><div class="menu-item-desc">Sprøstekt fisk og pommes frites. Gjort riktig.</div></div></div>
       <div class="menu-item"><div class="menu-item-img"><img src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?w=300&q=80" alt="Grillet Kylling"/></div><div class="menu-item-body"><div class="menu-item-name">Grillet Kylling</div><div class="menu-item-desc">Saftig kylling med sesongbasert tilbehør.</div></div></div>
     </div>
- 
+
     <div class="menu-cat" id="cat-salater">
       <div class="menu-item"><div class="menu-item-img"><img src="https://images.unsplash.com/photo-1546793665-c74683f339c1?w=300&q=80" alt="Cæsar"/></div><div class="menu-item-body"><div class="menu-item-name">Cæsar Salat</div><div class="menu-item-desc">Romaine, parmesan, krutonger og klassisk cæsar-dressing.</div></div></div>
       <div class="menu-item"><div class="menu-item-img"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&q=80" alt="Chevre Salat"/></div><div class="menu-item-body"><div class="menu-item-name">Chevre Salat</div><div class="menu-item-desc">Varm geitost, valnøtter og balsamico på sprø salatbunn.</div></div></div>
@@ -461,7 +461,7 @@ footer{background:var(--ink);padding:3rem 4vw;display:flex;align-items:center;ju
     </div>
   </div>
 </section>
- 
+
 <!-- GALLERY -->
 <div class="mosaic rv">
   <div class="mosaic-grid">
@@ -472,7 +472,7 @@ footer{background:var(--ink);padding:3rem 4vw;display:flex;align-items:center;ju
     <div class="mos"><img src="https://images.unsplash.com/photo-1488459716781-31db52582fe9?w=700&q=85" alt="Mat"/><span class="mos-label">Godbiter</span></div>
   </div>
 </div>
- 
+
 <!-- QUOTE -->
 <section class="quote-sec rv">
   <div class="quote-bg"></div>
@@ -482,7 +482,7 @@ footer{background:var(--ink);padding:3rem 4vw;display:flex;align-items:center;ju
     <span class="quote-author">Fryd Manglerud – vår filosofi</span>
   </div>
 </section>
- 
+
 <!-- BOOKING BAND -->
 <div class="book-band rv">
   <div class="book-band-text">
@@ -497,7 +497,7 @@ footer{background:var(--ink);padding:3rem 4vw;display:flex;align-items:center;ju
     <a href="#meny" class="btn-ink-outline">Se meny</a>
   </div>
 </div>
- 
+
 <!-- ÅPNINGSTIDER -->
 <section class="hours-sec sec" id="apningstider">
   <div class="inner">
@@ -527,7 +527,7 @@ footer{background:var(--ink);padding:3rem 4vw;display:flex;align-items:center;ju
     </div>
   </div>
 </section>
- 
+
 <!-- KONTAKT -->
 <section class="contact-sec" id="kontakt">
   <div class="inner">
@@ -555,7 +555,7 @@ footer{background:var(--ink);padding:3rem 4vw;display:flex;align-items:center;ju
     </div>
   </div>
 </section>
- 
+
 <footer>
   <div class="f-logo">Fryd <em>Manglerud</em></div>
   <p class="f-copy">© 2025 Fryd Manglerud AS · Plogveien 6, 0679 Oslo</p>
@@ -566,18 +566,18 @@ footer{background:var(--ink);padding:3rem 4vw;display:flex;align-items:center;ju
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
 </footer>
- 
-<a href="tel:+4793400275" class="sticky-book" id="stickyBook">📞 Bestill bord</a>
- 
+
+<a href="booking.html" class="sticky-book" id="stickyBook">📞 Bestill bord</a>
+
 <script>
 const nav = document.getElementById('nav');
 window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 60); }, {passive:true});
- 
+
 const hbg = document.getElementById('hbg');
 const mob = document.getElementById('mobMenu');
 hbg.addEventListener('click', () => { hbg.classList.toggle('open'); mob.classList.toggle('open'); });
 document.querySelectorAll('.mob-link,.mob-cta').forEach(a => a.addEventListener('click', () => { hbg.classList.remove('open'); mob.classList.remove('open'); }));
- 
+
 document.getElementById('menuTabs').addEventListener('click', e => {
   const btn = e.target.closest('.tab');
   if (!btn) return;
@@ -586,18 +586,18 @@ document.getElementById('menuTabs').addEventListener('click', e => {
   btn.classList.add('active');
   document.getElementById('cat-' + btn.dataset.cat).classList.add('active');
 });
- 
+
 const hours = ['13:00 – 22:00','11:00 – 23:00','11:00 – 23:00','11:00 – 23:00','11:00 – 23:00','11:00 – 01:00','11:00 – 01:00'];
 const d = new Date().getDay();
 const row = document.getElementById('r'+d);
 if (row) { row.classList.add('today-row'); const pill = document.createElement('span'); pill.className='today-pill'; pill.textContent='I dag'; row.querySelector('.day').appendChild(pill); }
 const th = document.getElementById('todayHours');
 if (th) th.textContent = hours[d];
- 
+
 const rvEls = document.querySelectorAll('.rv,.rv2');
 const obs = new IntersectionObserver(entries => entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('vis');obs.unobserve(e.target)} }), {threshold:.1});
 rvEls.forEach(el => obs.observe(el));
- 
+
 const sb = document.getElementById('stickyBook');
 window.addEventListener('scroll', () => { if(sb) sb.style.opacity = window.scrollY > 500 ? '1' : '0'; }, {passive:true});
 </script>
