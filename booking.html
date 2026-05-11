@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Bestill bord – Fryd Manglerud</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0D0B08;
+  --ink2:#181510;
+  --ink3:#232018;
+  --ink4:#2A2520;
+  --cream:#F7F2EA;
+  --white:#FDFAF5;
+  --gold:#C9893C;
+  --gold2:#E8A85A;
+  --gold-dim:rgba(201,137,60,.12);
+  --gold-glow:rgba(201,137,60,.25);
+  --muted:#8A8070;
+  --muted2:#5C5548;
+  --error:#E05555;
+  --success:#4CAF76;
+  --display:'Cormorant Garamond',Georgia,serif;
+  --body:'Outfit',sans-serif;
+  --ease:cubic-bezier(.25,.46,.45,.94);
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--body);background:var(--ink);color:var(--cream);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+
+/* NOISE */
+body::before{content:'';position:fixed;inset:0;z-index:999;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");opacity:.025;mix-blend-mode:overlay}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  height:68px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 4vw;
+  background:rgba(13,11,8,.88);backdrop-filter:blur(24px);
+  border-bottom:1px solid rgba(201,137,60,.12);
+}
+.nav-logo{font-family:var(--display);font-size:1.4rem;font-weight:700;color:var(--gold);letter-spacing:.01em;line-height:1}
+.nav-logo em{color:var(--cream);font-style:italic;font-weight:400}
+.nav-back{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--muted);transition:color .2s;
+}
+.nav-back svg{width:16px;height:16px;transition:transform .2s}
+.nav-back:hover{color:var(--gold)}
+.nav-back:hover svg{transform:translateX(-3px)}
+
+/* LAYOUT */
+.page{
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 420px;
+  padding-top:68px;
+}
+
+/* LEFT PANEL */
+.panel-left{
+  position:relative;overflow:hidden;
+  min-height:calc(100vh - 68px);
+}
+.panel-bg{
+  position:absolute;inset:0;
+  background:url('https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=1200&q=85') center/cover no-repeat;
+  filter:brightness(.45) saturate(.8);
+  transform:scale(1.04);
+  animation:pzoom 10s var(--ease) forwards;
+}
+@keyframes pzoom{to{transform:scale(1)}}
+.panel-left-content{
+  position:relative;z-index:2;
+  height:100%;display:flex;flex-direction:column;justify-content:flex-end;
+  padding:4rem;
+}
+.panel-eyebrow{
+  display:inline-flex;align-items:center;gap:.6rem;
+  font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.25rem;
+  opacity:0;animation:fup .8s .3s var(--ease) forwards;
+}
+.panel-eyebrow span{width:24px;height:1px;background:var(--gold);display:block}
+.panel-left-content h2{
+  font-family:var(--display);
+  font-size:clamp(2.2rem,3.5vw,3.2rem);
+  font-weight:700;line-height:1.1;color:var(--white);
+  margin-bottom:1rem;
+  opacity:0;animation:fup .8s .5s var(--ease) forwards;
+}
+.panel-left-content h2 i{font-style:italic;color:var(--gold);font-weight:400}
+.panel-left-content p{
+  font-size:.95rem;line-height:1.75;
+  color:rgba(247,242,234,.6);
+  max-width:400px;font-weight:300;
+  margin-bottom:2.5rem;
+  opacity:0;animation:fup .8s .7s var(--ease) forwards;
+}
+.panel-info{
+  display:flex;flex-direction:column;gap:1rem;
+  opacity:0;animation:fup .8s .9s var(--ease) forwards;
+}
+.p-info-item{
+  display:flex;align-items:center;gap:.9rem;
+  font-size:.85rem;color:rgba(247,242,234,.7);
+}
+.p-info-item svg{width:16px;height:16px;color:var(--gold);flex-shrink:0}
+.p-info-item strong{color:var(--cream);font-weight:500}
+
+/* RIGHT PANEL – FORM */
+.panel-right{
+  background:var(--ink2);
+  border-left:1px solid rgba(201,137,60,.1);
+  overflow-y:auto;
+  max-height:calc(100vh - 68px);
+  position:sticky;
+  top:68px;
+}
+.form-wrap{padding:3rem 2.5rem 4rem}
+
+.form-header{margin-bottom:2.5rem}
+.form-label-top{
+  font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);display:flex;align-items:center;gap:.6rem;margin-bottom:.9rem;
+}
+.form-label-top::before{content:'';width:20px;height:1px;background:var(--gold)}
+.form-header h1{
+  font-family:var(--display);font-size:2rem;font-weight:700;
+  color:var(--white);line-height:1.15;
+}
+.form-header h1 i{font-style:italic;color:var(--gold);font-weight:400}
+
+/* FORM FIELDS */
+.field-group{margin-bottom:1.25rem}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+label{
+  display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:.55rem;font-weight:500;
+}
+.field-required::after{content:' *';color:var(--gold)}
+input,select,textarea{
+  width:100%;background:var(--ink3);
+  border:1.5px solid rgba(201,137,60,.15);
+  border-radius:3px;
+  color:var(--cream);font-family:var(--body);font-size:.95rem;font-weight:300;
+  padding:.85rem 1rem;outline:none;
+  transition:border-color .2s,background .2s,box-shadow .2s;
+  appearance:none;-webkit-appearance:none;
+}
+input:focus,select:focus,textarea:focus{
+  border-color:var(--gold);background:var(--ink4);
+  box-shadow:0 0 0 3px var(--gold-dim);
+}
+input::placeholder,textarea::placeholder{color:var(--muted2)}
+input[type="date"]{color-scheme:dark}
+select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9893C' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 1rem center;
+  padding-right:2.5rem;
+  cursor:pointer;
+}
+select option{background:var(--ink2);color:var(--cream)}
+textarea{resize:vertical;min-height:100px;line-height:1.6}
+
+/* Validation states */
+.field-group.error input,
+.field-group.error select,
+.field-group.error textarea{
+  border-color:var(--error);
+  box-shadow:0 0 0 3px rgba(224,85,85,.12);
+}
+.field-group.ok input,
+.field-group.ok select,
+.field-group.ok textarea{
+  border-color:rgba(76,175,118,.4);
+}
+.err-msg{
+  font-size:.72rem;color:var(--error);margin-top:.4rem;
+  display:none;align-items:center;gap:.35rem;
+}
+.field-group.error .err-msg{display:flex}
+.err-msg::before{content:'!';width:14px;height:14px;background:var(--error);color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:700;flex-shrink:0}
+
+/* DIVIDER */
+.form-divider{
+  display:flex;align-items:center;gap:1rem;
+  margin:1.75rem 0;
+  font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted2);
+}
+.form-divider::before,.form-divider::after{content:'';flex:1;height:1px;background:rgba(201,137,60,.1)}
+
+/* SUMMARY CARD */
+.summary-card{
+  background:var(--ink);border:1px solid rgba(201,137,60,.2);
+  border-radius:4px;padding:1.25rem 1.5rem;margin-bottom:1.75rem;
+  display:flex;align-items:center;gap:1rem;
+  min-height:64px;transition:all .3s var(--ease);
+}
+.summary-icon{
+  width:36px;height:36px;background:var(--gold-dim);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.summary-icon svg{width:16px;height:16px;color:var(--gold)}
+.summary-text{flex:1}
+.summary-label{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.25rem}
+.summary-value{
+  font-family:var(--display);font-size:1.15rem;font-weight:600;
+  color:var(--gold);line-height:1.2;
+}
+.summary-empty{color:var(--muted2);font-size:.85rem;font-family:var(--body);font-weight:300;font-style:italic}
+
+/* SUBMIT */
+.btn-submit{
+  width:100%;background:var(--gold);color:var(--ink);
+  font-family:var(--body);font-size:.88rem;font-weight:600;
+  letter-spacing:.08em;text-transform:uppercase;
+  padding:1.15rem 2rem;border-radius:3px;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:.75rem;
+  box-shadow:0 4px 24px rgba(201,137,60,.3);
+  transition:background .2s,transform .15s,box-shadow .2s,opacity .2s;
+  margin-top:1.75rem;position:relative;overflow:hidden;
+}
+.btn-submit:hover:not(:disabled){background:var(--gold2);transform:translateY(-1px);box-shadow:0 8px 32px rgba(201,137,60,.4)}
+.btn-submit:disabled{opacity:.7;cursor:not-allowed;transform:none}
+.btn-submit .btn-text{transition:opacity .2s}
+.btn-submit .btn-spinner{display:none;width:18px;height:18px}
+.btn-submit.loading .btn-text{opacity:0;position:absolute}
+.btn-submit.loading .btn-spinner{display:block;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* PRIVACY NOTE */
+.form-note{
+  text-align:center;margin-top:1rem;
+  font-size:.72rem;color:var(--muted2);line-height:1.6;
+}
+.form-note a{color:var(--muted);transition:color .2s}
+.form-note a:hover{color:var(--gold)}
+
+/* SUCCESS OVERLAY */
+.success-overlay{
+  position:fixed;inset:0;z-index:980;
+  background:rgba(13,11,8,.96);backdrop-filter:blur(20px);
+  display:flex;align-items:center;justify-content:center;
+  padding:2rem;
+  opacity:0;pointer-events:none;
+  transition:opacity .4s var(--ease);
+}
+.success-overlay.show{opacity:1;pointer-events:all}
+.success-box{
+  background:var(--ink2);border:1px solid rgba(201,137,60,.2);
+  border-radius:6px;padding:3.5rem;max-width:520px;width:100%;
+  text-align:center;
+  transform:translateY(30px);transition:transform .5s var(--ease);
+}
+.success-overlay.show .success-box{transform:none}
+.success-check{
+  width:72px;height:72px;background:rgba(76,175,118,.12);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 1.75rem;
+  animation:popIn .5s .1s var(--ease) both;
+}
+@keyframes popIn{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.success-check svg{width:32px;height:32px;color:var(--success)}
+.success-eyebrow{
+  font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.85rem;
+  display:flex;align-items:center;justify-content:center;gap:.6rem;
+}
+.success-eyebrow span{width:20px;height:1px;background:var(--gold);display:block}
+.success-box h2{
+  font-family:var(--display);font-size:2rem;font-weight:700;
+  color:var(--white);line-height:1.2;margin-bottom:1rem;
+}
+.success-box h2 i{color:var(--gold);font-style:italic;font-weight:400}
+.success-box p{
+  font-size:.95rem;color:var(--muted);line-height:1.75;
+  font-weight:300;margin-bottom:.75rem;
+}
+.success-ref{
+  display:inline-block;background:var(--gold-dim);border:1px solid rgba(201,137,60,.25);
+  border-radius:3px;padding:.5rem 1.25rem;
+  font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gold);margin:1.25rem 0 2rem;
+}
+.success-summary{
+  background:var(--ink);border:1px solid rgba(201,137,60,.15);
+  border-radius:3px;padding:1.25rem;margin-bottom:2rem;
+  display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;
+}
+.s-sum-item{text-align:center}
+.s-sum-label{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.3rem}
+.s-sum-val{font-family:var(--display);font-size:1.1rem;font-weight:600;color:var(--gold)}
+.success-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn-success-back{
+  background:var(--gold);color:var(--ink);
+  font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  padding:.9rem 1.75rem;border-radius:3px;border:none;cursor:pointer;
+  display:inline-block;transition:background .2s,transform .15s;
+}
+.btn-success-back:hover{background:var(--gold2);transform:translateY(-1px)}
+.btn-success-call{
+  background:transparent;color:var(--cream);
+  font-size:.8rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  padding:.9rem 1.75rem;border-radius:3px;
+  border:1.5px solid rgba(247,242,234,.2);
+  display:inline-block;transition:border-color .2s,color .2s;
+}
+.btn-success-call:hover{border-color:var(--gold);color:var(--gold)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(24px);transition:opacity .65s var(--ease),transform .65s var(--ease)}
+.rv.vis{opacity:1;transform:none}
+@keyframes fup{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .page{grid-template-columns:1fr;grid-template-rows:auto}
+  .panel-left{min-height:50vw;max-height:380px}
+  .panel-right{position:static;max-height:none;border-left:none;border-top:1px solid rgba(201,137,60,.1)}
+  .form-wrap{padding:2.5rem 1.5rem 3.5rem}
+  .panel-left-content{padding:2.5rem}
+}
+@media(max-width:600px){
+  .field-row{grid-template-columns:1fr}
+  .success-box{padding:2.5rem 1.5rem}
+  .success-summary{gap:1.25rem}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="fryd-manglerud.html" class="nav-logo">Fryd <em>Manglerud</em></a>
+  <a href="fryd-manglerud.html" class="nav-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>
+    Tilbake til forsiden
+  </a>
+</nav>
+
+<!-- MAIN LAYOUT -->
+<main class="page">
+
+  <!-- LEFT: AMBIENT PANEL -->
+  <div class="panel-left">
+    <div class="panel-bg"></div>
+    <div class="panel-left-content">
+      <div class="panel-eyebrow"><span></span>Bordreservasjon</div>
+      <h2>Reserver ditt<br><i>bord hos oss.</i></h2>
+      <p>Fyll ut skjemaet og vi bekrefter bordreservasjonen din. Walk-ins er alltid velkomne, men for å sikre deg plass anbefaler vi å booke på forhånd.</p>
+      <div class="panel-info">
+        <div class="p-info-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 .18h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <span><strong>+47 93 40 02 75</strong> – Ring oss direkte</span>
+        </div>
+        <div class="p-info-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span>Man–Tor <strong>11–23</strong> · Fre–Lør <strong>11–01</strong> · Søn <strong>13–22</strong></span>
+        </div>
+        <div class="p-info-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Plogveien 6, <strong>Manglerud Senter</strong>, Oslo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: FORM PANEL -->
+  <div class="panel-right">
+    <div class="form-wrap">
+
+      <div class="form-header rv">
+        <div class="form-label-top">Bestill bord</div>
+        <h1>Din<br><i>reservasjon.</i></h1>
+      </div>
+
+      <form id="bookingForm" novalidate>
+
+        <!-- NAME + PHONE -->
+        <div class="field-row rv">
+          <div class="field-group" id="fg-name">
+            <label class="field-required" for="name">Fullt navn</label>
+            <input type="text" id="name" name="name" placeholder="Ola Nordmann" autocomplete="name"/>
+            <div class="err-msg">Vennligst oppgi navn</div>
+          </div>
+          <div class="field-group" id="fg-phone">
+            <label class="field-required" for="phone">Telefon</label>
+            <input type="tel" id="phone" name="phone" placeholder="123 45 678" autocomplete="tel"/>
+            <div class="err-msg">Oppgi gyldig telefonnummer</div>
+          </div>
+        </div>
+
+        <!-- EMAIL -->
+        <div class="field-group rv" id="fg-email">
+          <label class="field-required" for="email">E-postadresse</label>
+          <input type="email" id="email" name="email" placeholder="ola@eksempel.no" autocomplete="email"/>
+          <div class="err-msg">Oppgi en gyldig e-postadresse</div>
+        </div>
+
+        <div class="form-divider rv">Tidspunkt</div>
+
+        <!-- DATE + GUESTS -->
+        <div class="field-row rv">
+          <div class="field-group" id="fg-date">
+            <label class="field-required" for="date">Dato</label>
+            <input type="date" id="date" name="date"/>
+            <div class="err-msg">Velg en dato</div>
+          </div>
+          <div class="field-group" id="fg-guests">
+            <label class="field-required" for="guests">Antall personer</label>
+            <select id="guests" name="guests">
+              <option value="">Velg antall</option>
+              <option value="1">1 person</option>
+              <option value="2">2 personer</option>
+              <option value="3">3 personer</option>
+              <option value="4">4 personer</option>
+              <option value="5">5 personer</option>
+              <option value="6">6 personer</option>
+              <option value="7">7 personer</option>
+              <option value="8">8 personer</option>
+              <option value="9">9 personer</option>
+              <option value="10">10 personer</option>
+              <option value="11">11 personer</option>
+              <option value="12">12 personer</option>
+              <option value="13">13 personer</option>
+              <option value="14">14 personer</option>
+              <option value="15">15 personer</option>
+              <option value="16">16 personer</option>
+              <option value="17">17 personer</option>
+              <option value="18">18 personer</option>
+              <option value="19">19 personer</option>
+              <option value="20">20+ personer</option>
+            </select>
+            <div class="err-msg">Velg antall gjester</div>
+          </div>
+        </div>
+
+        <!-- TIME -->
+        <div class="field-group rv" id="fg-time">
+          <label class="field-required" for="time">Tidspunkt</label>
+          <select id="time" name="time">
+            <option value="">Velg tidspunkt</option>
+            <option>11:00</option><option>11:30</option>
+            <option>12:00</option><option>12:30</option>
+            <option>13:00</option><option>13:30</option>
+            <option>14:00</option><option>14:30</option>
+            <option>15:00</option><option>15:30</option>
+            <option>16:00</option><option>16:30</option>
+            <option>17:00</option><option>17:30</option>
+            <option>18:00</option><option>18:30</option>
+            <option>19:00</option><option>19:30</option>
+            <option>20:00</option><option>20:30</option>
+            <option>21:00</option><option>21:30</option>
+            <option>22:00</option>
+          </select>
+          <div class="err-msg">Velg ønsket tidspunkt</div>
+        </div>
+
+        <!-- COMMENTS -->
+        <div class="field-group rv" id="fg-notes">
+          <label for="notes">Spesielle ønsker / kommentarer</label>
+          <textarea id="notes" name="notes" placeholder="Allergier, bursdag, barnesete, vindusplass, ønske om meny på forhånd..."></textarea>
+        </div>
+
+        <div class="form-divider rv">Din reservasjon</div>
+
+        <!-- SUMMARY CARD -->
+        <div class="summary-card rv" id="summaryCard">
+          <div class="summary-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="summary-text">
+            <div class="summary-label">Oppsummering</div>
+            <div class="summary-value" id="summaryValue">
+              <span class="summary-empty">Fyll ut skjemaet over</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SUBMIT -->
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <span class="btn-text">Bekreft reservasjon</span>
+          <svg class="btn-spinner" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" stroke-linecap="round"/></svg>
+        </button>
+
+        <p class="form-note rv">
+          Ved å sende inn bekrefter du at vi kan kontakte deg angående din reservasjon.<br>
+          Trenger du hjelp? Ring oss på <a href="tel:+4793400275">+47 93 40 02 75</a>
+        </p>
+
+      </form>
+    </div>
+  </div>
+</main>
+
+<!-- SUCCESS OVERLAY -->
+<div class="success-overlay" id="successOverlay">
+  <div class="success-box">
+    <div class="success-check">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <div class="success-eyebrow"><span></span>Bekreftet<span></span></div>
+    <h2>Takk, <i id="successName">!</i></h2>
+    <p>Din bordreservasjon er mottatt. Vi kontakter deg ved behov – sjekk gjerne e-posten din.</p>
+    <div class="success-ref" id="successRef">REF: FRY-0000</div>
+    <div class="success-summary" id="successSummary"></div>
+    <div class="success-actions">
+      <a href="fryd-manglerud.html" class="btn-success-back">Tilbake til forsiden</a>
+      <a href="tel:+4793400275" class="btn-success-call">Ring oss</a>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── Set min date to today ── */
+const dateEl = document.getElementById('date');
+const today = new Date();
+const yyyy = today.getFullYear();
+const mm = String(today.getMonth()+1).padStart(2,'0');
+const dd = String(today.getDate()).padStart(2,'0');
+dateEl.min = `${yyyy}-${mm}-${dd}`;
+
+/* ── Norwegian month names ── */
+const months = ['januar','februar','mars','april','mai','juni','juli','august','september','oktober','november','desember'];
+const days = ['søndag','mandag','tirsdag','onsdag','torsdag','fredag','lørdag'];
+
+function formatDate(val){
+  if(!val) return null;
+  const [y,m,d] = val.split('-').map(Number);
+  const date = new Date(y,m-1,d);
+  return `${days[date.getDay()]} ${d}. ${months[m-1]}`;
+}
+
+/* ── Live summary update ── */
+function updateSummary(){
+  const guests = document.getElementById('guests').value;
+  const date = document.getElementById('date').value;
+  const time = document.getElementById('time').value;
+  const sv = document.getElementById('summaryValue');
+  const card = document.getElementById('summaryCard');
+
+  if(guests && date && time){
+    const gLabel = guests === '1' ? '1 person' : `${guests} personer`;
+    sv.innerHTML = `${gLabel} &nbsp;·&nbsp; ${formatDate(date)} &nbsp;·&nbsp; kl. ${time}`;
+    sv.style.color = 'var(--gold)';
+    card.style.borderColor = 'rgba(201,137,60,.35)';
+    card.style.background = 'rgba(201,137,60,.05)';
+  } else {
+    sv.innerHTML = '<span class="summary-empty">Fyll ut dato, antall og tid</span>';
+    sv.style.color = '';
+    card.style.borderColor = '';
+    card.style.background = '';
+  }
+}
+
+['guests','date','time'].forEach(id => {
+  document.getElementById(id).addEventListener('change', updateSummary);
+});
+document.getElementById('date').addEventListener('input', updateSummary);
+
+/* ── Field validation ── */
+function validateField(id, checkFn){
+  const fg = document.getElementById('fg-'+id);
+  const el = document.getElementById(id);
+  if(!fg || !el) return true;
+  const ok = checkFn(el.value.trim());
+  fg.classList.toggle('error', !ok);
+  fg.classList.toggle('ok', ok);
+  return ok;
+}
+
+const validators = {
+  name: v => v.length >= 2,
+  phone: v => /^[\d\s\+\-]{6,}$/.test(v),
+  email: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v),
+  date: v => !!v,
+  guests: v => !!v,
+  time: v => !!v,
+};
+
+Object.keys(validators).forEach(id => {
+  const el = document.getElementById(id);
+  if(el) el.addEventListener('blur', () => validateField(id, validators[id]));
+  if(el) el.addEventListener('input', () => {
+    const fg = document.getElementById('fg-'+id);
+    if(fg && fg.classList.contains('error')) validateField(id, validators[id]);
+  });
+});
+
+/* ── Ref generator ── */
+function makeRef(){
+  return 'FRY-' + Math.floor(1000 + Math.random()*9000);
+}
+
+/* ── Submit ── */
+document.getElementById('bookingForm').addEventListener('submit', function(e){
+  e.preventDefault();
+
+  let valid = true;
+  Object.keys(validators).forEach(id => {
+    if(!validateField(id, validators[id])) valid = false;
+  });
+
+  if(!valid){
+    const firstErr = document.querySelector('.field-group.error input, .field-group.error select');
+    if(firstErr) firstErr.scrollIntoView({behavior:'smooth', block:'center'});
+    return;
+  }
+
+  // Loading state
+  const btn = document.getElementById('submitBtn');
+  btn.classList.add('loading');
+  btn.disabled = true;
+
+  setTimeout(() => {
+    // Build success data
+    const name = document.getElementById('name').value.trim().split(' ')[0];
+    const guests = document.getElementById('guests').value;
+    const date = document.getElementById('date').value;
+    const time = document.getElementById('time').value;
+    const gLabel = guests === '1' ? '1 person' : `${guests} personer`;
+    const ref = makeRef();
+
+    document.getElementById('successName').textContent = name + '!';
+    document.getElementById('successRef').textContent = 'REF: ' + ref;
+
+    document.getElementById('successSummary').innerHTML = `
+      <div class="s-sum-item"><div class="s-sum-label">Gjester</div><div class="s-sum-val">${gLabel}</div></div>
+      <div class="s-sum-item"><div class="s-sum-label">Dato</div><div class="s-sum-val">${formatDate(date)}</div></div>
+      <div class="s-sum-item"><div class="s-sum-label">Klokkeslett</div><div class="s-sum-val">kl. ${time}</div></div>
+    `;
+
+    btn.classList.remove('loading');
+    btn.disabled = false;
+
+    document.getElementById('successOverlay').classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }, 1600);
+});
+
+/* ── Close success on bg click ── */
+document.getElementById('successOverlay').addEventListener('click', function(e){
+  if(e.target === this){
+    this.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+});
+
+/* ── Scroll reveal ── */
+const rvEls = document.querySelectorAll('.rv');
+const obs = new IntersectionObserver(entries => entries.forEach(e => {
+  if(e.isIntersecting){ e.target.classList.add('vis'); obs.unobserve(e.target); }
+}), {threshold:.08});
+rvEls.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
